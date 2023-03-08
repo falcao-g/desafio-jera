@@ -1,0 +1,68 @@
+body {
+	background-color: coral;
+	color: whitesmoke;
+}
+
+#container {
+	padding: 0 12px;
+	max-width: 620px;
+	margin: auto;
+}
+
+header {
+	max-width: 480px;
+	margin: auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	max-height: 70px;
+	align-items: center;
+}
+
+button {
+	font-size: 1.5em;
+	border: 0;
+	margin: 10px;
+	background-color: darkred;
+	color: whitesmoke;
+}
+
+#config {
+	display: block;
+	margin-right: 0;
+	border-radius: 10px;
+	max-width: 150px;
+	font-size: 17px;
+	height: 40px;
+}
+
+#box {
+	text-align: center;
+	max-width: 480px;
+	margin: auto;
+	background-color: darkred;
+	border-radius: 5px;
+}
+
+.mini-buttons {
+	font-size: 1.2em;
+}
+
+#timer {
+	font-size: 4em;
+	text-align: center;
+	margin: 50px;
+}
+
+#pause-button {
+	background-color: black;
+	width: 150px;
+	height: 60px;
+	border-bottom: 6px solid #232628;
+	border-radius: 5px;
+}
+
+#pomodoros-counter {
+	text-align: center;
+	margin-top: 50px;
+}
