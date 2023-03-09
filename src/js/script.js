@@ -6,6 +6,7 @@ let interval
 let pomodoros = 0
 let isPaused = false
 let state = "pomodoro"
+Notification.requestPermission()
 
 const minutesSpan = document.getElementById("minutes")
 const secondsSpan = document.getElementById("seconds")
@@ -57,21 +58,30 @@ function startTimer() {
 				if (state == "pomodoro") {
 					pomodoros++
 					pomodorosSpan.textContent = pomodoros
-					console.log(pomodoros)
-					console.log(pomodoros % 4 === 0)
 
 					if (pomodoros % 4 === 0) {
+						if (Notification.permission === "granted") {
+							new Notification("Hora da pausa!", {
+								body: "Você fez 4 pomodoros, é recomendado que você faça uma pausa longa agora",
+							})
+						}
 						state = "longpause"
 						pomodoroButton.classList.remove("highlight")
 						intervalButton.classList.remove("highlight")
 						longIntervalButton.classList.add("highlight")
 					} else {
+						if (Notification.permission === "granted") {
+							new Notification("Hora da pausa!")
+						}
 						state = "pause"
 						pomodoroButton.classList.remove("highlight")
 						intervalButton.classList.add("highlight")
 						longIntervalButton.classList.remove("highlight")
 					}
 				} else {
+					if (Notification.permission === "granted") {
+						new Notification("Hora de focar!")
+					}
 					state = "pomodoro"
 					pomodoroButton.classList.add("highlight")
 					intervalButton.classList.remove("highlight")
