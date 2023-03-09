@@ -19,12 +19,20 @@ header {
 	align-items: center;
 }
 
+h1 {
+	color: darkred;
+}
+
 button {
 	font-size: 1.5em;
 	border: 0;
 	margin: 10px;
-	background-color: darkred;
 	color: whitesmoke;
+	background-color: transparent;
+}
+
+button:hover {
+	cursor: pointer;
 }
 
 #config {
@@ -34,6 +42,7 @@ button {
 	max-width: 150px;
 	font-size: 17px;
 	height: 40px;
+	background-color: darkred;
 }
 
 #box {
@@ -49,7 +58,7 @@ button {
 }
 
 #timer {
-	font-size: 4em;
+	font-size: 5em;
 	text-align: center;
 	margin: 50px;
 }
@@ -65,4 +74,13 @@ button {
 #pomodoros-counter {
 	text-align: center;
 	margin-top: 50px;
+}
+
+.highlight {
+	border: medium none;
+	margin: 0px;
+	border-radius: 4px;
+	cursor: pointer;
+	background: rgba(0, 0, 0, 0.15);
+	font-weight: bold;
 }
