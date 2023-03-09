@@ -90,6 +90,17 @@ function startTimer() {
 
 				startTimer()
 			}
+
+			if (state === "pomodoro") {
+				document.title = `${formatTime(time).split(":")[0]}:${
+					formatTime(time).split(":")[1]
+				} - Hora de focar!`
+			} else {
+				document.title = `${formatTime(time).split(":")[0]}:${
+					formatTime(time).split(":")[1]
+				} - Hora de descansar!`
+			}
+
 			minutesSpan.textContent = formatTime(time).split(":")[0]
 			secondsSpan.textContent = formatTime(time).split(":")[1]
 		}
