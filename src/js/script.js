@@ -55,13 +55,22 @@ function startTimer() {
 				new Audio("notification.mp3").play()
 
 				if (state == "pomodoro") {
-					state = "pause"
-					pomodoroButton.classList.remove("highlight")
-					intervalButton.classList.add("highlight")
-					longIntervalButton.classList.remove("highlight")
-
 					pomodoros++
 					pomodorosSpan.textContent = pomodoros
+					console.log(pomodoros)
+					console.log(pomodoros % 4 === 0)
+
+					if (pomodoros % 4 === 0) {
+						state = "longpause"
+						pomodoroButton.classList.remove("highlight")
+						intervalButton.classList.remove("highlight")
+						longIntervalButton.classList.add("highlight")
+					} else {
+						state = "pause"
+						pomodoroButton.classList.remove("highlight")
+						intervalButton.classList.add("highlight")
+						longIntervalButton.classList.remove("highlight")
+					}
 				} else {
 					state = "pomodoro"
 					pomodoroButton.classList.add("highlight")
