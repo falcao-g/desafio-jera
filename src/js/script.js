@@ -6,10 +6,6 @@ let interval
 let pomodoros = 0
 let isPaused = false
 let state = "pomodoro"
-const pomodoroColor = "coral"
-const pomodoroDarkerColor = "darkred"
-const pauseColor = "cadetblue"
-const pauseDarkerColor = "darkblue"
 
 const minutesSpan = document.getElementById("minutes")
 const secondsSpan = document.getElementById("seconds")
@@ -19,9 +15,7 @@ const configButton = document.getElementById("config")
 const pauseButton = document.getElementById("pause-button")
 const pomodoroButton = document.getElementById("pomodoro-button")
 const pomodorosSpan = document.getElementById("pomodoros")
-const h1 = document.querySelector("h1")
 const config = document.getElementById("config")
-const box = document.getElementById("box")
 
 function formatTime(time) {
 	const minutes = Math.floor(time / 60)
@@ -33,15 +27,11 @@ function formatTime(time) {
 
 function changeColor() {
 	if (state == "pomodoro") {
-		document.body.style.backgroundColor = pomodoroColor
-		h1.style.color = pomodoroDarkerColor
-		config.style.backgroundColor = pomodoroDarkerColor
-		box.style.backgroundColor = pomodoroDarkerColor
+		document.documentElement.style.setProperty("--main-color", "coral")
+		document.documentElement.style.setProperty("--secondary-color", "darkred")
 	} else {
-		document.body.style.backgroundColor = pauseColor
-		h1.style.color = pauseDarkerColor
-		config.style.backgroundColor = pauseDarkerColor
-		box.style.backgroundColor = pauseDarkerColor
+		document.documentElement.style.setProperty("--main-color", "cadetblue")
+		document.documentElement.style.setProperty("--secondary-color", "darkblue")
 	}
 }
 

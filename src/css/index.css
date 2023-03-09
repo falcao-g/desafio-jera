@@ -1,6 +1,12 @@
+:root {
+	--main-color: coral;
+	--secondary-color: darkred;
+	--text-color: whitesmoke;
+}
+
 body {
-	background-color: coral;
-	color: whitesmoke;
+	background-color: var(--main-color);
+	color: var(--text-color);
 }
 
 #container {
@@ -20,14 +26,14 @@ header {
 }
 
 h1 {
-	color: darkred;
+	color: var(--secondary-color);
 }
 
 button {
 	font-size: 1.5em;
 	border: 0;
 	margin: 10px;
-	color: whitesmoke;
+	color: var(--text-color);
 	background-color: transparent;
 }
 
@@ -42,14 +48,14 @@ button:hover {
 	max-width: 150px;
 	font-size: 17px;
 	height: 40px;
-	background-color: darkred;
+	background-color: var(--secondary-color);
 }
 
 #box {
 	text-align: center;
 	max-width: 480px;
 	margin: auto;
-	background-color: darkred;
+	background-color: var(--secondary-color);
 	border-radius: 5px;
 }
 
