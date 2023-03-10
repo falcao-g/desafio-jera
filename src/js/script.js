@@ -1,10 +1,10 @@
 let pomodoroTime = 25 * 60
 let pauseTime = 5 * 60
 let longPauseTime = 10 * 60
-let time
+let time = 25 * 60
 let interval
 let pomodoros = 0
-let isPaused = false
+let isPaused = true
 let state = "pomodoro"
 Notification.requestPermission()
 
@@ -40,19 +40,6 @@ function highlightButton() {
 }
 
 function startTimer() {
-	document.documentElement.style.setProperty("--main-color", "cadetblue")
-	document.documentElement.style.setProperty("--secondary-color", "darkblue")
-
-	if (state === "pause") {
-		time = pauseTime
-	} else if (state === "longpause") {
-		time = longPauseTime
-	} else {
-		time = pomodoroTime
-		document.documentElement.style.setProperty("--main-color", "coral")
-		document.documentElement.style.setProperty("--secondary-color", "darkred")
-	}
-
 	interval = setInterval(() => {
 		if (!isPaused) {
 			time--
@@ -103,8 +90,22 @@ function startTimer() {
 }
 
 function reset() {
-	highlightButton()
 	clearInterval(interval)
+	document.documentElement.style.setProperty("--main-color", "cadetblue")
+	document.documentElement.style.setProperty("--secondary-color", "darkblue")
+
+	if (state === "pause") {
+		time = pauseTime
+	} else if (state === "longpause") {
+		time = longPauseTime
+	} else {
+		time = pomodoroTime
+		document.documentElement.style.setProperty("--main-color", "coral")
+		document.documentElement.style.setProperty("--secondary-color", "darkred")
+	}
+	highlightButton()
+	minutesSpan.textContent = formatTime(time).split(":")[0]
+	secondsSpan.textContent = formatTime(time).split(":")[1]
 	startTimer()
 }
 
@@ -135,8 +136,10 @@ pauseButton.addEventListener("click", () => {
 
 	if (isPaused === true) {
 		pauseButton.textContent = "Começar"
+		pauseButton.id = "pause-button"
 	} else {
-		pauseButton.textContent = "Pausar"
+		pauseButton.textContent = "Parar"
+		pauseButton.id = "start-button"
 	}
 })
 

@@ -73,6 +73,14 @@ button:hover {
 	font-size: 1.2em;
 }
 
+.mini-buttons:active,
+#config:active,
+#pause-button:active {
+	position: relative;
+	transition: top 0.5s ease-in-out;
+	top: 3px;
+}
+
 #timer {
 	font-size: 7.5em;
 	font-family: Arial, Helvetica, sans-serif;
@@ -86,6 +94,20 @@ button:hover {
 	width: 200px;
 	height: 60px;
 	border-bottom: 6px solid lightgray;
+	border-radius: 5px;
+}
+
+#pause-button:active {
+	border-bottom: 0;
+}
+
+#start-button {
+	position: relative;
+	top: 3px;
+	background-color: whitesmoke;
+	color: var(--secondary-color);
+	width: 200px;
+	height: 60px;
 	border-radius: 5px;
 }
 
