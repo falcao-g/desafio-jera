@@ -26,36 +26,41 @@ function formatTime(time) {
 		.padStart(2, "0")}`
 }
 
-function changeColor() {
-	if (state == "pomodoro") {
-		document.documentElement.style.setProperty("--main-color", "coral")
-		document.documentElement.style.setProperty("--secondary-color", "darkred")
+function highlightButton() {
+	pomodoroButton.classList.remove("highlight")
+	intervalButton.classList.remove("highlight")
+	longIntervalButton.classList.remove("highlight")
+	if (state === "pomodoro") {
+		pomodoroButton.classList.add("highlight")
+	} else if (state === "pause") {
+		intervalButton.classList.add("highlight")
 	} else {
-		document.documentElement.style.setProperty("--main-color", "cadetblue")
-		document.documentElement.style.setProperty("--secondary-color", "darkblue")
+		longIntervalButton.classList.add("highlight")
 	}
 }
 
 function startTimer() {
-	changeColor()
-	if (state == "pomodoro") {
-		time = pomodoroTime
-	} else if (state == "pause") {
+	document.documentElement.style.setProperty("--main-color", "cadetblue")
+	document.documentElement.style.setProperty("--secondary-color", "darkblue")
+
+	if (state === "pause") {
 		time = pauseTime
-	} else {
+	} else if (state === "longpause") {
 		time = longPauseTime
+	} else {
+		time = pomodoroTime
+		document.documentElement.style.setProperty("--main-color", "coral")
+		document.documentElement.style.setProperty("--secondary-color", "darkred")
 	}
 
 	interval = setInterval(() => {
 		if (!isPaused) {
 			time--
 			if (time < 0) {
-				clearInterval(interval)
-
 				//colocar som
 				new Audio("notification.mp3").play()
 
-				if (state == "pomodoro") {
+				if (state === "pomodoro") {
 					pomodoros++
 					pomodorosSpan.textContent = pomodoros
 
@@ -66,29 +71,19 @@ function startTimer() {
 							})
 						}
 						state = "longpause"
-						pomodoroButton.classList.remove("highlight")
-						intervalButton.classList.remove("highlight")
-						longIntervalButton.classList.add("highlight")
 					} else {
 						if (Notification.permission === "granted") {
 							new Notification("Hora da pausa!")
 						}
 						state = "pause"
-						pomodoroButton.classList.remove("highlight")
-						intervalButton.classList.add("highlight")
-						longIntervalButton.classList.remove("highlight")
 					}
 				} else {
 					if (Notification.permission === "granted") {
 						new Notification("Hora de focar!")
 					}
 					state = "pomodoro"
-					pomodoroButton.classList.add("highlight")
-					intervalButton.classList.remove("highlight")
-					longIntervalButton.classList.remove("highlight")
 				}
-
-				startTimer()
+				reset()
 			}
 
 			if (state === "pomodoro") {
@@ -107,38 +102,31 @@ function startTimer() {
 	}, 1000)
 }
 
-pomodoroButton.addEventListener("click", () => {
-	pomodoroButton.classList.add("highlight")
-	intervalButton.classList.remove("highlight")
-	longIntervalButton.classList.remove("highlight")
-	state = "pomodoro"
+function reset() {
+	highlightButton()
 	clearInterval(interval)
 	startTimer()
+}
+
+pomodoroButton.addEventListener("click", () => {
+	state = "pomodoro"
+	reset()
 })
 
 intervalButton.addEventListener("click", () => {
-	pomodoroButton.classList.remove("highlight")
-	intervalButton.classList.add("highlight")
-	longIntervalButton.classList.remove("highlight")
 	state = "pause"
-	clearInterval(interval)
-	startTimer()
+	reset()
 })
 
 longIntervalButton.addEventListener("click", () => {
-	pomodoroButton.classList.remove("highlight")
-	intervalButton.classList.remove("highlight")
-	longIntervalButton.classList.add("highlight")
 	state = "longpause"
-	clearInterval(interval)
-	startTimer()
+	reset()
 })
 
 configButton.addEventListener("click", () => {
 	pomodoroTime = prompt("Enter new time (in minutes): ") * 60
 	if (state == "pomodoro") {
-		clearInterval(interval)
-		startTimer()
+		reset()
 	}
 })
 
