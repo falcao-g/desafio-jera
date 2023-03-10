@@ -1,11 +1,12 @@
 let pomodoroTime = 25 * 60
 let pauseTime = 5 * 60
 let longPauseTime = 10 * 60
-let time = 25 * 60
+let time = pomodoroTime
 let interval
 let pomodoros = 0
 let isPaused = true
 let state = "pomodoro"
+const notification = new Audio("./src/sounds/notification.mp3")
 Notification.requestPermission()
 
 const minutesSpan = document.getElementById("minutes")
@@ -44,8 +45,8 @@ function startTimer() {
 		if (!isPaused) {
 			time--
 			if (time < 0) {
-				//colocar som
-				new Audio("notification.mp3").play()
+				notification.play()
+				setTimeout(() => {}, 1000)
 
 				if (state === "pomodoro") {
 					pomodoros++
