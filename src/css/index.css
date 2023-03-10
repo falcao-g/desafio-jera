@@ -101,7 +101,7 @@ form button {
 	color: black;
 	font-size: 1em;
 	position: relative;
-	bottom: 3px;
+	bottom: 4px;
 }
 
 .outoffocus {
@@ -238,4 +238,11 @@ form input {
 	cursor: pointer;
 	background: rgba(0, 0, 0, 0.15);
 	font-weight: bold;
+}
+
+@media (max-width: 800px) {
+	.selectors .row:nth-child(3) {
+		position: relative;
+		bottom: 8.5px;
+	}
 }
