@@ -21,11 +21,11 @@ const pomodoroButton = document.getElementById("pomodoro-button")
 const pomodorosSpan = document.getElementById("pomodoros")
 const configContainer = document.getElementById("config-container")
 const configClose = document.getElementById("config-close")
-const pomodoroInput = document.getElementById("pomodoroInput")
-const pauseInput = document.getElementById("pauseInput")
-const longPauseInput = document.getElementById("longPauseInput")
-const intervalsInput = document.getElementById("intervalsInput")
-const timerAutoButton = document.getElementById("timerAutoButton")
+const pomodoroInput = document.getElementById("pomodoro-input")
+const pauseInput = document.getElementById("pause-input")
+const longPauseInput = document.getElementById("long-pause-input")
+const intervalsInput = document.getElementById("intervals-input")
+const timerAutoButton = document.getElementById("timer-auto-button")
 const prettyButton = document.getElementById("pretty-button")
 
 function formatTime(time) {
@@ -171,14 +171,12 @@ configClose.addEventListener("click", () => {
 timerAutoButton.addEventListener("click", () => {
 	if (autoStart) {
 		autoStart = false
-		timerAutoButton.classList.add("pretty-button-off")
-		timerAutoButton.classList.remove("pretty-button-on")
+		timerAutoButton.classList = "pretty-button-off"
 		prettyButton.style.left = "2px"
 	} else {
 		autoStart = true
 		pauseButton.click()
-		timerAutoButton.classList.remove("pretty-button-off")
-		timerAutoButton.classList.add("pretty-button-on")
+		timerAutoButton.classList = "pretty-button-on"
 		prettyButton.style.left = "auto"
 		prettyButton.style.right = "2px"
 	}
