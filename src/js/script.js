@@ -92,17 +92,19 @@ function startTimer() {
 
 function reset() {
 	clearInterval(interval)
-	document.documentElement.style.setProperty("--main-color", "cadetblue")
-	document.documentElement.style.setProperty("--secondary-color", "darkblue")
 
 	if (state === "pause") {
 		time = pauseTime
+		document.documentElement.style.setProperty("--main-color", "#38858A")
+		document.documentElement.style.setProperty("--secondary-color", "#4C9196")
 	} else if (state === "longpause") {
 		time = longPauseTime
+		document.documentElement.style.setProperty("--main-color", "#397097")
+		document.documentElement.style.setProperty("--secondary-color", "#4D7FA2")
 	} else {
 		time = pomodoroTime
-		document.documentElement.style.setProperty("--main-color", "coral")
-		document.documentElement.style.setProperty("--secondary-color", "darkred")
+		document.documentElement.style.setProperty("--main-color", "#BA4949")
+		document.documentElement.style.setProperty("--secondary-color", "#c15c5c")
 	}
 	highlightButton()
 	minutesSpan.textContent = formatTime(time).split(":")[0]

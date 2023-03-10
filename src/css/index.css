@@ -1,6 +1,6 @@
 :root {
-	--main-color: coral;
-	--secondary-color: darkred;
+	--main-color: #ba4949;
+	--secondary-color: #c15c5c;
 	--text-color: whitesmoke;
 }
 
@@ -29,9 +29,8 @@ header {
 
 h1 {
 	font-size: 2em;
-	text-shadow: 1px 1px 10px var(--secondary-color),
-		-1px -1px 10px var(--secondary-color), 1px -1px 10px var(--secondary-color),
-		-1px 1px 10px var(--secondary-color);
+	text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3), -1px -1px 5px rgba(0, 0, 0, 0.3),
+		1px -1px 5px rgba(0, 0, 0, 0.3), -1px 1px 5px rgba(0, 0, 0, 0.3);
 }
 
 button {
