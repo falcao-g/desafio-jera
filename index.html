@@ -15,6 +15,66 @@
 				<button id="config">⚙️ Configurações</button>
 			</header>
 
+			<div id="config-container">
+				<form>
+					<div class="line">
+						<h2>Configurações</h2>
+						<button id="config-close">X</button>
+					</div>
+
+					<div class="line">
+						<p class="outoffocus">Tempo (em minutos)</p>
+					</div>
+
+					<div class="selectors line">
+						<div class="row">
+							<label>Pomodoro</label>
+							<input
+								type="number"
+								min="1"
+								step="1"
+								id="pomodoroInput"
+								value="25"
+							/>
+						</div>
+
+						<div class="row">
+							<label>Pausa</label>
+							<input type="number" min="1" step="1" id="pauseInput" value="5" />
+						</div>
+
+						<div class="row">
+							<label>Pausa longa</label>
+							<input
+								type="number"
+								min="1"
+								step="1"
+								id="longPauseInput"
+								value="10"
+							/>
+						</div>
+					</div>
+
+					<div class="line">
+						<span>Timer começa automatico</span>
+						<div id="timerAutoButton" class="pretty-button-off">
+							<div id="pretty-button"></div>
+						</div>
+					</div>
+
+					<div class="line">
+						<span>Intervalo de pausas longas</span>
+						<input
+							id="intervalsInput"
+							type="number"
+							min="1"
+							step="1"
+							value="4"
+						/>
+					</div>
+				</form>
+			</div>
+
 			<div id="box">
 				<div id="top-row">
 					<button id="pomodoro-button" class="mini-buttons highlight">

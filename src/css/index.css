@@ -55,6 +55,119 @@ button:hover {
 	background-color: var(--secondary-color);
 }
 
+#config-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	z-index: 9999;
+}
+
+#config-container form {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 20px;
+	color: black;
+	border-radius: 10px;
+}
+
+.line {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin: 0.5em;
+	margin-top: 1em;
+	align-items: center;
+}
+
+form .line:nth-child(1) {
+	margin-bottom: 1.5em;
+	margin-top: 0;
+}
+
+form h2 {
+	font-size: 1.3em;
+}
+
+form button {
+	margin: 0;
+	height: 16px;
+	color: black;
+	font-size: 1em;
+	position: relative;
+	bottom: 3px;
+}
+
+.outoffocus {
+	color: lightslategray;
+}
+
+.row {
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.5em;
+	margin-right: 0.5em;
+}
+
+.selectors .row:nth-child(1) {
+	margin-left: 0;
+}
+
+.selectors .row:nth-child(3) {
+	margin-right: 0;
+}
+
+form input {
+	background-color: rgba(0, 0, 0, 0.1);
+	width: 80px;
+	border: 0;
+	padding: 0.3em;
+}
+
+.row input {
+	margin-top: 0.2em;
+}
+
+#pretty-button {
+	position: absolute;
+	left: 2px;
+	width: 28px;
+	height: 28px;
+	border-radius: 50px;
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 1px;
+}
+
+.pretty-button-off {
+	cursor: pointer;
+	width: 60px;
+	height: 32px;
+	border-radius: 50px;
+	background-color: rgb(204, 204, 204);
+	position: relative;
+	display: inline-flex;
+	-moz-box-align: center;
+	align-items: center;
+}
+
+.pretty-button-on {
+	cursor: pointer;
+	width: 60px;
+	height: 32px;
+	border-radius: 50px;
+	position: relative;
+	display: inline-flex;
+	-moz-box-align: center;
+	align-items: center;
+	background-color: rgba(132, 199, 51, 0.8);
+}
+
 #box {
 	text-align: center;
 	max-width: clamp(200px, 480px, 480px);

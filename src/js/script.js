@@ -6,6 +6,8 @@ let interval
 let pomodoros = 0
 let isPaused = true
 let state = "pomodoro"
+let intervals = 4
+let autoStart = false
 const notification = new Audio("./src/sounds/notification.mp3")
 Notification.requestPermission()
 
@@ -17,7 +19,14 @@ const configButton = document.getElementById("config")
 const pauseButton = document.getElementById("pause-button")
 const pomodoroButton = document.getElementById("pomodoro-button")
 const pomodorosSpan = document.getElementById("pomodoros")
-const config = document.getElementById("config")
+const configContainer = document.getElementById("config-container")
+const configClose = document.getElementById("config-close")
+const pomodoroInput = document.getElementById("pomodoroInput")
+const pauseInput = document.getElementById("pauseInput")
+const longPauseInput = document.getElementById("longPauseInput")
+const intervalsInput = document.getElementById("intervalsInput")
+const timerAutoButton = document.getElementById("timerAutoButton")
+const prettyButton = document.getElementById("pretty-button")
 
 function formatTime(time) {
 	const minutes = Math.floor(time / 60)
@@ -52,10 +61,10 @@ function startTimer() {
 					pomodoros++
 					pomodorosSpan.textContent = pomodoros
 
-					if (pomodoros % 4 === 0) {
+					if (pomodoros % intervals === 0) {
 						if (Notification.permission === "granted") {
 							new Notification("Hora da pausa!", {
-								body: "Você fez 4 pomodoros, é recomendado que você faça uma pausa longa agora",
+								body: `Você fez ${intervals} pomodoros, é recomendado que você faça uma pausa longa agora`,
 							})
 						}
 						state = "longpause"
@@ -71,6 +80,11 @@ function startTimer() {
 					}
 					state = "pomodoro"
 				}
+
+				if (!autoStart) {
+					pauseButton.click()
+				}
+
 				reset()
 			}
 
@@ -127,13 +141,6 @@ longIntervalButton.addEventListener("click", () => {
 	reset()
 })
 
-configButton.addEventListener("click", () => {
-	pomodoroTime = prompt("Enter new time (in minutes): ") * 60
-	if (state == "pomodoro") {
-		reset()
-	}
-})
-
 pauseButton.addEventListener("click", () => {
 	isPaused = !isPaused
 
@@ -144,6 +151,62 @@ pauseButton.addEventListener("click", () => {
 		pauseButton.textContent = "Parar"
 		pauseButton.id = "start-button"
 	}
+})
+
+// Exibe a div de configurações quando o botão é clicado
+configButton.addEventListener("click", () => {
+	configContainer.style.display = "block"
+})
+
+configContainer.addEventListener("click", (e) => {
+	if (e.target === configContainer) {
+		configClose.click()
+	}
+})
+
+configClose.addEventListener("click", () => {
+	configContainer.style.display = "none"
+})
+
+timerAutoButton.addEventListener("click", () => {
+	if (autoStart) {
+		autoStart = false
+		timerAutoButton.classList.add("pretty-button-off")
+		timerAutoButton.classList.remove("pretty-button-on")
+		prettyButton.style.left = "2px"
+	} else {
+		autoStart = true
+		pauseButton.click()
+		timerAutoButton.classList.remove("pretty-button-off")
+		timerAutoButton.classList.add("pretty-button-on")
+		prettyButton.style.left = "auto"
+		prettyButton.style.right = "2px"
+	}
+})
+
+configContainer.addEventListener("submit", (event) => {
+	event.preventDefault()
+	var oldPomodoroTime = pomodoroTime
+	var oldPauseTime = pauseTime
+	var oldLongPauseTime = longPauseTime
+
+	pomodoroTime = pomodoroInput.value * 60
+	pauseTime = pauseInput.value * 60
+	longPauseTime = longPauseInput.value * 60
+
+	if (state === "pomodoro" && oldPomodoroTime != pomodoroTime) {
+		reset()
+	}
+
+	if (state === "pause" && oldPauseTime != pauseTime) {
+		reset()
+	}
+
+	if (state === "longpause" && oldLongPauseTime != longPauseTime) {
+		reset()
+	}
+
+	intervals = intervalsInput.value
 })
 
 startTimer()
