@@ -192,7 +192,9 @@ timerAutoButton.addEventListener("click", () => {
 		prettyButton.style.left = "2px"
 	} else {
 		autoStart = true
-		pauseButton.click()
+		if (isPaused) {
+			pauseButton.click()
+		}
 		timerAutoButton.classList = "pretty-button-on"
 		prettyButton.style.left = "auto"
 		prettyButton.style.right = "2px"
