@@ -49,6 +49,50 @@ function highlightButton() {
 	}
 }
 
+function sendNotification() {
+	if (state === "pomodoro") {
+		if (pomodoros % intervals === 0) {
+			if (Notification.permission === "granted") {
+				new Notification("Hora da pausa!", {
+					body: `Você fez ${intervals} pomodoros, é recomendado que você faça uma pausa longa agora`,
+				})
+			}
+		} else {
+			if (Notification.permission === "granted") {
+				new Notification("Hora da pausa!")
+			}
+		}
+	} else {
+		if (Notification.permission === "granted") {
+			new Notification("Hora de focar!")
+		}
+	}
+}
+
+function manageStates() {
+	if (state === "pomodoro") {
+		if (pomodoros % intervals === 0) {
+			state = "longpause"
+		} else {
+			state = "pause"
+		}
+	} else {
+		state = "pomodoro"
+	}
+}
+
+function changeTitle() {
+	if (state === "pomodoro") {
+		document.title = `${formatTime(time).split(":")[0]}:${
+			formatTime(time).split(":")[1]
+		} - Hora de focar!`
+	} else {
+		document.title = `${formatTime(time).split(":")[0]}:${
+			formatTime(time).split(":")[1]
+		} - Hora de descansar!`
+	}
+}
+
 function startTimer() {
 	interval = setInterval(() => {
 		if (!isPaused) {
@@ -60,26 +104,9 @@ function startTimer() {
 				if (state === "pomodoro") {
 					pomodoros++
 					pomodorosSpan.textContent = pomodoros
-
-					if (pomodoros % intervals === 0) {
-						if (Notification.permission === "granted") {
-							new Notification("Hora da pausa!", {
-								body: `Você fez ${intervals} pomodoros, é recomendado que você faça uma pausa longa agora`,
-							})
-						}
-						state = "longpause"
-					} else {
-						if (Notification.permission === "granted") {
-							new Notification("Hora da pausa!")
-						}
-						state = "pause"
-					}
-				} else {
-					if (Notification.permission === "granted") {
-						new Notification("Hora de focar!")
-					}
-					state = "pomodoro"
 				}
+				sendNotification()
+				manageStates()
 
 				if (!autoStart) {
 					pauseButton.click()
@@ -87,17 +114,7 @@ function startTimer() {
 
 				reset()
 			}
-
-			if (state === "pomodoro") {
-				document.title = `${formatTime(time).split(":")[0]}:${
-					formatTime(time).split(":")[1]
-				} - Hora de focar!`
-			} else {
-				document.title = `${formatTime(time).split(":")[0]}:${
-					formatTime(time).split(":")[1]
-				} - Hora de descansar!`
-			}
-
+			changeTitle()
 			minutesSpan.textContent = formatTime(time).split(":")[0]
 			secondsSpan.textContent = formatTime(time).split(":")[1]
 		}
